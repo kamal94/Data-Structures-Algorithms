@@ -28,5 +28,11 @@ public class main{
 		System.out.println(LL.removeDuplicates());
 		System.out.println(LL.remove(0,1));
 
+		LinkedList<Integer> ll = new LinkedList<Integer>();
+		ll.put(new Integer(1));
+		System.out.println(ll.toString());
+		ll.remove(1,1);
+		System.out.println(ll.toString());
+
 	}
 }

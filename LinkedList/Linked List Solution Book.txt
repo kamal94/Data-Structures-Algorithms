@@ -1,0 +1,13 @@
+Linked List Solution Book
+
+2.1
+	Write code to remove duplicated from an unsorted linked list
+	FOLLOW UP
+	How would you solve this provlem if a temporary buffer is not allowed?
+
+Ans:
+	With temporary buffer:
+	As we go through linked list, we check for the node's value in a hashmap, and if the value doesn't exist we store the node's value in the hash map. If the value does exist, the current node is a duplicate, and we remove that node from the linekd list.
+	Without temporary buffer:
+	Since we can not store the value of any node in a buffer, we must compare every node in the list, which means we would get a traversal like the insertion sort, with a O(n^2).
+

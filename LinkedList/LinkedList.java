@@ -8,6 +8,10 @@ import java.util.Iterator;
 public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 {
 	private LLNode head, tail;
+
+	public LinkedList()
+	{}
+
 	/**
 	 * Constructs a Linked List form an array
 	 * @param  array the array to be converted to a Linked List
@@ -15,9 +19,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	public LinkedList(T[] array)
 	{
 		for(T t:array)
-		{
 			put(t);
-		}
 	}
 
 	/**
@@ -31,6 +33,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 		{	
 			head = node;
 			tail = head;
+			return;
 		}
 		tail.setNext(node); //add data to trailing tail
 		tail = tail.getNext();
@@ -47,12 +50,18 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	public int remove(T t, int occ)
 	{
 		LLNode n;
-		if(head == null)
+		if(isEmpty())	//edge case: if list is empty
 			return -1;
 		else 
 			n = head;
 
-		//TODO::edge case when LL size is 1
+		//edge case: if LL is size 1
+		if(head.getNext() == null && head.getData().equals(t)
+			 && occ == 1)
+		{
+			head = null;
+			return 0;
+		}
 
 		int counter = 1;
 		int index = 0;
@@ -85,6 +94,14 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 		return head;
 	}
 
+	/**
+	 * Returns true if the Linked List is empty
+	 * @return true if the Linked list is empty
+	 */
+	public boolean isEmpty()
+	{
+		return head == null;
+	}
 	/**
 	 * Returns a string representation of the LinkedList. The string representation
 	 * of the nodes depends on the implementation of the toString method of the Objects 

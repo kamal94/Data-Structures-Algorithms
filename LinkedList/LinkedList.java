@@ -102,6 +102,23 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	{
 		return head == null;
 	}
+
+	/**
+	 * Returns the nth node in the linked list, where the 1st node is the head node.
+	 * @param  ind the index of the node to be returned.
+	 * @return   LLNode		the node at the given index.
+	 */
+	public LLNode getNthNode(int ind)
+	{
+		LLNode node = head;
+		for(int i = 0; i < ind-1; i++)
+		{
+			if(node == null)
+				return null;
+			node = node.getNext();
+		}
+		return node;
+	}
 	/**
 	 * Returns a string representation of the LinkedList. The string representation
 	 * of the nodes depends on the implementation of the toString method of the Objects 
@@ -141,6 +158,16 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 		return false;	//if end is reached return false
 	}
 
+	public String removeNode(LLNode n)
+	{
+		n = n.getNext();
+		return toString();
+	}
+
+	/**
+	 * Removes duplicates from the linked list.
+	 * @return String 	A string representation of the Linked List after removing duplicates
+	 */
 	public String removeDuplicates()
 	{
 		HashMap<Integer, T> hashmap = new HashMap<Integer, T>();
@@ -159,6 +186,62 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 		return this.toString();
 	}
 
+	/**
+	 * Returns the k to last element in the list by checking the length of the list and
+	 * running along the list again to find the k-to-last element. If the index is out of
+	 * bound, null is returned.
+	 * @param  k The offset from the end of the list for the index of the Node wanted.
+	 *           For k = 1, the method will return the last element.
+	 * @return   The Node k-to-last from the end in the Linked List
+	 */
+	public LLNode bruteForceNthoLastElement(int k)
+	{
+		int length = 0;
+		Iterator<LLNode> it = iterator();
+		while(it.hasNext())
+		{
+			length++;
+			it.next();
+		}
+		System.out.println("Linked List length: " + length);
+		int index = length -1 - k;
+		LLNode n = head;
+		for(int i = 0; i<index; i++)
+		{
+			n = n.getNext();
+		}
+
+		return n;
+	}
+
+	/**
+	 * Returns the k to last element in the list by checking the length of the list and
+	 * running along the list again to find the k-to-last element. If the index is out of
+	 * bound, null is returned.
+	 * @param  k The offset from the end of the list for the index of the Node wanted.
+	 *           For k = 1, the method will return the last element.
+	 * @return   The Node k-to-last from the end in the Linked List
+	 */
+	public LLNode recursiveNthoLastElement(LLNode head, int  k, Carrier car)
+	{
+		// Carrier car = new Carrier();
+		// car.goal = k;
+		// car.node = head;
+		if(head == null)	//base case
+			return null;
+
+		LLNode node =  recursiveNthoLastElement(head.getNext(), k, car);
+
+		if(car.count == k)
+			return node;
+
+		car.count++;
+		return head;
+	}
+
+	public class Carrier {
+		int count = 0;
+	}
 
 	/**
 	 * Implementing iterator method that iterates from the head to the tail

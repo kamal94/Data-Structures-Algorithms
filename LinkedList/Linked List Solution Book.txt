@@ -1,7 +1,6 @@
 Linked List Solution Book
 
-2.1
-	Write code to remove duplicated from an unsorted linked list
+2.1 Write code to remove duplicated from an unsorted linked list
 	FOLLOW UP
 	How would you solve this provlem if a temporary buffer is not allowed?
 
@@ -11,3 +10,5 @@ Ans:
 	Without temporary buffer:
 	Since we can not store the value of any node in a buffer, we must compare every node in the list, which means we would get a traversal like the insertion sort, with a O(n^2).
 
+2.2 Write an algorithm that returns the k-th to-lsat element in a linked list
+	Brute force: Run through the linked list once to calculate the length of the list then calculate the index ind of the k-th element (ind = length - k). Run through the list again to find the Node at index ind, then return it.

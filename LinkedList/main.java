@@ -25,14 +25,16 @@ public class main{
 		System.out.println("list: \n" +LL.toString());
 		System.out.println("LL contains 5: " + LL.contains(new Integer(5)));
 
-		System.out.println(LL.removeDuplicates());
-		System.out.println(LL.remove(0,1));
 
-		LinkedList<Integer> ll = new LinkedList<Integer>();
-		ll.put(new Integer(1));
-		System.out.println(ll.toString());
-		ll.remove(1,1);
-		System.out.println(ll.toString());
 
+		System.out.println("Node at second to last index 0: " + LL.bruteForceNthoLastElement(0));
+		LL.removeDuplicates();
+
+		LLNode node = LL.getNthNode(4);
+		System.out.println("4th node: " + node.toString());
+		System.out.println(LL.removeNode(node));
+		System.out.println(node.getNext());
+		System.out.println( "3rd to last element in List: " +
+			LL.recursiveNthoLastElement(LL.getNthNode(1), 3,  LL.new Carrier()));
 	}
 }

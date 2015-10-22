@@ -32,7 +32,8 @@ public class main{
 
 		LLNode node = LL.getNthNode(4);
 		System.out.println("4th node: " + node.toString());
-		System.out.println(LL.removeNode(node));
+		System.out.println("Removed node: " + LL.removeNode(node));
+		System.out.println("List \n: " + LL.toString());
 		System.out.println(node.getNext());
 		System.out.println( "3rd to last element in List: " +
 			LL.recursiveNthoLastElement(LL.getNthNode(1), 3,  LL.new Carrier()));

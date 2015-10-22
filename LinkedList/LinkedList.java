@@ -158,10 +158,14 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 		return false;	//if end is reached return false
 	}
 
-	public String removeNode(LLNode n)
+	public LLNode removeNode(LLNode n)
 	{
-		n = n.getNext();
-		return toString();
+		if(n.getNext() == null)
+			return null;
+
+		n.setData((T) n.getNext().getData());
+		n.setNext(removeNode(n.getNext()));
+		return n;
 	}
 
 	/**

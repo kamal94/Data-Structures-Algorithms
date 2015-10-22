@@ -13,6 +13,11 @@ public class LLNode<T extends Comparable<T>>
 		next = n;
 	}
 
+	public void setData(T t)
+	{
+		data = t;
+	}
+
 	public T getData()
 	{
 		return data;

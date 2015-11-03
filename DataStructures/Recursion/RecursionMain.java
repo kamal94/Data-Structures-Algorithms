@@ -1,7 +1,9 @@
+package DataStructures.Recursion;
+
 /**
  * 
  */
-public class main{
+public class RecursionMain {
 
 	public static final long MAX_STEP_POSSIBLITIES = 50;
 	private static long[] stepPossibilities = new long[(int) MAX_STEP_POSSIBLITIES];

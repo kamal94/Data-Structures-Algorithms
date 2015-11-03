@@ -1,3 +1,6 @@
+package DataStructures.LinkedList;
+import DataStructures.BuildingBlocks.Node;
+
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -5,9 +8,9 @@ import java.util.Iterator;
  * @author Kamal Kamalaldin
  * @version 10/19/2015
  */
-public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
+public class LinkedList<T extends Comparable<T>> implements Iterable<Node>
 {
-	private LLNode head, tail;
+	private Node head, tail;
 
 	public LinkedList()
 	{}
@@ -28,7 +31,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	 */
 	public void put(T data)
 	{
-		LLNode<T> node = new LLNode<T>(data);
+		Node<T> node = new Node<T>(data);
 		if(head == null)	//if no head, then begin LL with data
 		{	
 			head = node;
@@ -43,13 +46,13 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	 * Removes the first i-th occurance of the object t in the Linked list. If an i-th 
 	 * occrance can not be found, the method returns -1.
 	 * @param  t 	the object to be removed in the Linked List, whose occrance is i
-	 * @param  i  	the occrance of the object t in the linked List. The first occrance 
+	 * @param  occ  	the occrance of the object t in the linked List. The first occrance
 	 *             is represented by 1.
 	 * @return   index 	the index of the object that was removed.
 	 */
 	public int remove(T t, int occ)
 	{
-		LLNode n;
+		Node n;
 		if(isEmpty())	//edge case: if list is empty
 			return -1;
 		else 
@@ -65,7 +68,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 
 		int counter = 1;
 		int index = 0;
-		LLNode next = n.getNext();
+		Node next = n.getNext();
 		while(next != null)
 		{
 			if(next.getData().equals(t))
@@ -89,7 +92,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	 * Peeks at the head of the the LinkedList
 	 * @return [description]
 	 */
-	public LLNode peek()
+	public Node peek()
 	{
 		return head;
 	}
@@ -106,11 +109,11 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	/**
 	 * Returns the nth node in the linked list, where the 1st node is the head node.
 	 * @param  ind the index of the node to be returned.
-	 * @return   LLNode		the node at the given index.
+	 * @return   Node		the node at the given index.
 	 */
-	public LLNode getNthNode(int ind)
+	public Node getNthNode(int ind)
 	{
-		LLNode node = head;
+		Node node = head;
 		for(int i = 0; i < ind-1; i++)
 		{
 			if(node == null)
@@ -130,10 +133,10 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	public String toString()
 	{
 		String string = "";
-		Iterator<LLNode> it = iterator();
+		Iterator<Node> it = iterator();
 		while(it.hasNext())
 		{
-			LLNode n = it.next();
+			Node n = it.next();
 			string += n.toString();
 			string += "->";
 		}
@@ -148,7 +151,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	 */
 	public boolean contains(T obj)
 	{
-		LLNode n = head;
+		Node n = head;
 		while(n!= null)	//until the end of the LL
 		{
 			if(n.getData().equals(obj))	//if any Node contains the same T, return true
@@ -158,7 +161,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 		return false;	//if end is reached return false
 	}
 
-	public LLNode removeNode(LLNode n)
+	public Node removeNode(Node n)
 	{
 		if(n.getNext() == null)
 			return null;
@@ -176,10 +179,10 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	{
 		HashMap<Integer, T> hashmap = new HashMap<Integer, T>();
 
-		Iterator<LLNode> it = iterator();
+		Iterator<Node> it = iterator();
 		while(it.hasNext())
 		{
-			LLNode n = it.next();
+			Node n = it.next();
 			if(hashmap.containsKey(n.getData().hashCode()))
 			{
 				System.out.println("Duplicate found at index " + remove((T) n.getData(), 2));
@@ -198,10 +201,10 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	 *           For k = 1, the method will return the last element.
 	 * @return   The Node k-to-last from the end in the Linked List
 	 */
-	public LLNode bruteForceNthoLastElement(int k)
+	public Node bruteForceNthoLastElement(int k)
 	{
 		int length = 0;
-		Iterator<LLNode> it = iterator();
+		Iterator<Node> it = iterator();
 		while(it.hasNext())
 		{
 			length++;
@@ -209,7 +212,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 		}
 		System.out.println("Linked List length: " + length);
 		int index = length -1 - k;
-		LLNode n = head;
+		Node n = head;
 		for(int i = 0; i<index; i++)
 		{
 			n = n.getNext();
@@ -226,7 +229,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	 *           For k = 1, the method will return the last element.
 	 * @return   The Node k-to-last from the end in the Linked List
 	 */
-	public LLNode recursiveNthoLastElement(LLNode head, int  k, Carrier car)
+	public Node recursiveNthoLastElement(Node head, int  k, Carrier car)
 	{
 		// Carrier car = new Carrier();
 		// car.goal = k;
@@ -234,7 +237,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 		if(head == null)	//base case
 			return null;
 
-		LLNode node =  recursiveNthoLastElement(head.getNext(), k, car);
+		Node node =  recursiveNthoLastElement(head.getNext(), k, car);
 
 		if(car.count == k)
 			return node;
@@ -252,11 +255,11 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
 	 * @return Iterator 	an Iterator instance
 	 */
 	@Override
-	public Iterator<LLNode> iterator()
+	public Iterator<Node> iterator()
 	{
-		Iterator<LLNode> it = new Iterator<LLNode>()
+		Iterator<Node> it = new Iterator<Node>()
 		{
-			LLNode n = head;
+			Node n = head;
 
 			@Override
             public boolean hasNext() {
@@ -264,8 +267,8 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<LLNode>
             }
 
             @Override
-            public LLNode next() {
-            	LLNode t = n;
+            public Node next() {
+            	Node t = n;
             	n = n.getNext();
                 return t;
             }

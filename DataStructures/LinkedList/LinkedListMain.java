@@ -1,9 +1,11 @@
+package DataStructures.LinkedList;
 
-import java.util.Iterator;
+import DataStructures.BuildingBlocks.Node;
+
 /**
  * 
  */
-public class main{
+public class LinkedListMain {
 
 	public static void main(String[] args)
 	{
@@ -30,7 +32,7 @@ public class main{
 		System.out.println("Node at second to last index 0: " + LL.bruteForceNthoLastElement(0));
 		LL.removeDuplicates();
 
-		LLNode node = LL.getNthNode(4);
+		Node node = LL.getNthNode(4);
 		System.out.println("4th node: " + node.toString());
 		System.out.println("Removed node: " + LL.removeNode(node));
 		System.out.println("List \n: " + LL.toString());

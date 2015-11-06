@@ -38,4 +38,8 @@ public class BinaryTree<T extends Comparable<T>> {
     public void setNode(Node<T> node) {
         this.node = node;
     }
+
+    public boolean isLeaf() {
+        return (getLeft() == null && getRight() == null);
+    }
 }

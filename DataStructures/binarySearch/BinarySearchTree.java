@@ -11,16 +11,28 @@ import DataStructures.BuildingBlocks.Node;
  *
  * 
  * Author: Kamal Kamalaldin
- * Version: 10/10/2015
+ * Version:11/11/2015
  */
 public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree
 {
+
+	//instance variables
 	private BinarySearchTree<T> left;
 	private BinarySearchTree<T> right;
 
 	public BinarySearchTree(Comparable comparable) {
 		super(comparable);
 	}
+
+    @Override
+    public BinarySearchTree<T> getLeft() {
+        return left;
+    }
+
+    @Override
+    public BinarySearchTree<T> getRight() {
+        return right;
+    }
 
     /**
      * Puts the object in the binary search tree and returns true if the inserttion is successful.
@@ -33,8 +45,9 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree
      */
     public boolean put(T t)
     {
-        if(t == null)
+        if(t == null) //check input
             return false;
+
         if(getNode() == null)
             setNode(new Node(t));
 
@@ -57,24 +70,44 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree
 	 */
 	public T find(T t)
 	{
-		if (this.getNode() == null)
+		if (this.getNode() == null) //base case, reached a leaf node
 			return null;
 
+		//compare t with current node
         int comp = getNode().compareTo(new Node(t));
-        if(comp<0) {
+        if(comp<0) {	//if t is bigger, search right tree
             if(getLeft() == null) {return null;}
             else return left.find(t);
-        }
+        }	//if t is smaller, search left tree
         else if(comp>0) {
             if(right == null) {return null;}
             else return right.find(t);
         }
-        else
+        else //if equal, t is found!
             return (T) getNode().getData();
 	}
 
 
+	/**
+	 * Returns true if the element is in the BST
+	 * @param t 	The element to be tested for presense in the BST
+	 * @return		True if the element is in the BST
+	 */
+	public boolean contains(T t)
+	{
+		return (find(t) != null);
+	}
 
+	/**
+	 * Searches for an element in a sorted array. Returns the index of the element if it
+     * is in the array, otherwise returns -1
+	 * @param array     a sorted array of T elements
+	 * @param target    T which is to be searched for
+	 * @param begin     The index at which the array search should begin
+	 * @param end       The index at which the array search should end
+	 * @return  int     The index of the object if it is in the array, or -1 if it is not
+     *                  in the array
+	 */
 	public static <T extends Comparable<T>> int binarySearch(T[] array, T target, int begin, int end)
 	{
 		int mid = begin + (end-begin)/2;

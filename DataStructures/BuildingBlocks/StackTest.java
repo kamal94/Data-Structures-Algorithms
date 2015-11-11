@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 /**
+ * A class to test StackTest class.
  * Created by Kamal on 11/4/15.
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Created to test BinaryTree class
  * Created by Kamal on 11/4/15.
  */
 public class BinaryTreeTest {

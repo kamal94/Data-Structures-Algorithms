@@ -9,7 +9,7 @@ import java.util.TreeSet;
  *
  * Created by Kamal on 11/11/15.
  */
-public class GraphNode <T extends Comparable<T>> {
+public class GraphNode <T extends Comparable<T>> implements Comparable<GraphNode<T>>{
     ArrayList<Edge<T>> edges;
     T t;
     private boolean connectionLoop;
@@ -19,6 +19,17 @@ public class GraphNode <T extends Comparable<T>> {
         connectionLoop = false;
         this.t = t;
         edges = new ArrayList<Edge<T>>();
+    }
+
+
+    /**
+     * Returns the element T in this node.
+     *
+     * @return T t
+     */
+    public T getElement()
+    {
+        return t;
     }
 
     /**
@@ -35,8 +46,8 @@ public class GraphNode <T extends Comparable<T>> {
 
         Edge<T> edge = new Edge<>(this, n);
         this.edges.add(edge);
-        n.connectNode(this);
         connectionLoop = true;
+        n.connectNode(this);
     }
 
     /**
@@ -47,7 +58,7 @@ public class GraphNode <T extends Comparable<T>> {
      */
     public boolean connectedTo(GraphNode<T> n)
     {
-        return edges.contains(n);
+        return edges.contains(new Edge<>(n, this));
     }
 
     /**
@@ -93,5 +104,10 @@ public class GraphNode <T extends Comparable<T>> {
             throw new ClassCastException("The object passed is not an instance of the GraphNode class");
 
         return this == obj;
+    }
+
+    @Override
+    public int compareTo(GraphNode<T> o) {
+        return this.getElement().compareTo(o.getElement());
     }
 }

@@ -7,4 +7,7 @@ import DataStructures.BuildingBlocks.Node;
  */
 public class Graph {
     Node[] nodes;
+
+    //TODO::Implimit Prim's algorithm
+    //TODO::Impliment Paskal's algorithm
 }

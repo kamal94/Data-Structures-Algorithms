@@ -1,24 +1,22 @@
 package DataStructures.TrieTree;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.TreeMap;
 
 /**
  * A class that represents a TrieTree used for storing words (strings).
  *
+ * Implementation is based on https://www.topcoder.com/community/data-science/data-science-tutorials/using-tries/
  * Created by Kamal on 12/6/15.
  */
 public class TrieTree {
-    public final int LETTER_COUNT = 26;
-    private int words;
     private int prefixes;
     private TreeMap<Character, TrieTree> children;
     private ArrayList<Character> childrenAdded;
 
+    //TODO::make tests for this class
     public TrieTree()
     {
-        words = 0;
         prefixes = 0;
         children = new TreeMap<>();
         childrenAdded = new ArrayList<>();
@@ -32,37 +30,42 @@ public class TrieTree {
     public void addWord(String s)
     {
         if(s.isEmpty())
-            words++;
+            return;
+        prefixes++;
+        char first = s.charAt(0);
+        if(children.containsKey(first))
+            children.get(first).addWord(s.substring(1));
         else {
-            prefixes++;
-            char first = s.charAt(0);
-            if(children.containsKey(first))
-                children.get(first).addWord(s.substring(1));
-            else {
-                TrieTree trieTree = new TrieTree();
-                trieTree.addWord(s.substring(1));
-                children.put(first, trieTree);
-            }
-            childrenAdded.add(first);
+            TrieTree trieTree = new TrieTree();
+            trieTree.addWord(s.substring(1));
+            children.put(first, trieTree);
         }
+        childrenAdded.add(first);
     }
 
-    public int getWordsCount()
-    {
-        return words;
-    }
 
     /**
-     * Returns the number of prefixes this Trie contains
-     * @return
+     * Returns the number of prefixes that the passes string can represent
+     * in this Trie. If the string is not in the trie, an exception is thrown.
+     * A string match does not count as a prefix count.
+     *
+     * @param s String  The string in the trie whose prefix count is desired.
+     * @return  int     The number of prefixes that this string stands for.
+     * @throws StringNotInTrieException Thrown if the passes string is not in the
+     *      trie.
      */
-    public int getPrefixCount()
-    {
-        int count = 0;
-        for(Character c: childrenAdded)
-            count += children.get(c).getWordsCount();
-        return count;
+    public int getPrefixCount(String s) throws StringNotInTrieException {
+        if (s == null)
+            return 0;
 
+        if (s.isEmpty()) //base case
+            return prefixes;
+
+        char first = s.charAt(0);
+        if(childrenAdded.contains(first))
+            return children.get(first).getPrefixCount(s.substring(1));
+        else
+            throw new StringNotInTrieException();
     }
 
     /**
@@ -88,4 +91,5 @@ public class TrieTree {
     }
 
 
+    public class StringNotInTrieException extends Exception {}
 }
